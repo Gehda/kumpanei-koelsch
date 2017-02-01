@@ -8,11 +8,20 @@
 
   <ion-navbar>
     <ion-title>penaltiy</ion-title>
+    <button ion-button>+</button>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <button ion-fab><ion-icon name="add"></ion-icon></button>
+  <ion-list>
+    <ion-item *ngFor="let event of events | async">
+      {{event.name}}
+    </ion-item>
+  </ion-list>
+  <pre>
+  {{events | async | json}}
+  </pre>
 </ion-content>
