@@ -1,3 +1,5 @@
+import { PenaltiyPage } from './../pages/penaltiy/penaltiy';
+import { ScriptPage } from './../pages/script/script';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -17,7 +19,9 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    PenaltiyPage,
+    ScriptPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -26,7 +30,9 @@ export const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    ScriptPage,
+    PenaltiyPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
