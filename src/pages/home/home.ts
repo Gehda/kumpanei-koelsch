@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
 
-import { PenaltiyPage } from './../penaltiy/penaltiy';
+import { EventsPage } from './../events/events';
 import { ScriptPage } from './../script/script';
 
 @Component({
@@ -10,7 +10,7 @@ import { ScriptPage } from './../script/script';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  pPage = PenaltiyPage;
+  ePage = EventsPage;
   sPage = ScriptPage;
   constructor(public navCtrl: NavController) {
     

@@ -1,4 +1,5 @@
-import { PenaltiyPage } from './../pages/penaltiy/penaltiy';
+import { EventDetailPage } from './../pages/event-detail/event-detail';
+import { EventsPage } from './../pages/events/events';
 import { ScriptPage } from './../pages/script/script';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -20,7 +21,8 @@ export const firebaseConfig = {
   declarations: [
     MyApp,
     HomePage,
-    PenaltiyPage,
+    EventsPage,
+    EventDetailPage,
     ScriptPage
   ],
   imports: [
@@ -32,7 +34,8 @@ export const firebaseConfig = {
     MyApp,
     HomePage,
     ScriptPage,
-    PenaltiyPage
+    EventsPage,
+    EventDetailPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

@@ -3,16 +3,16 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 /*
-  Generated class for the Penaltiy page.
+  Generated class for the events page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-penaltiy',
-  templateUrl: 'penaltiy.html'
+  selector: 'page-events',
+  templateUrl: 'events.html'
 })
-export class PenaltiyPage {
+export class EventsPage {
   events: FirebaseListObservable<any>;
 
   constructor(
@@ -25,7 +25,7 @@ export class PenaltiyPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PenaltiyPage');
+    console.log('ionViewDidLoad eventsPage');
   }
   addEvent() {
     let prompt = this.alertCtrl.create({
