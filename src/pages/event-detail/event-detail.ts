@@ -1,3 +1,4 @@
+import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
@@ -12,11 +13,20 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'event-detail.html'
 })
 export class EventDetailPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  event: FirebaseObjectObservable<any>;
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public angularFire: AngularFire
+    ) {
+      console.log(this.navParams);
+      console.log();
+      this.event = angularFire.database.object('/events/'+this.navParams.data.event.$key);
+  }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad EventDetailPage');
+    
+    
   }
 
 }

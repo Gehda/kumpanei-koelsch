@@ -1,3 +1,4 @@
+import { EventDetailPage } from './../event-detail/event-detail';
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
@@ -18,7 +19,7 @@ export class EventsPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    angularFire: AngularFire,
+    public angularFire: AngularFire,
     public alertCtrl: AlertController
   ) {
     this.events = angularFire.database.list('/events');
@@ -56,7 +57,7 @@ export class EventsPage {
     prompt.present();
   }
   eventDetail(event) {
-    console.log(event);
+    this.navCtrl.push(EventDetailPage, {event: event});
   }
   deleteEvent(event) {
     console.log("delete");

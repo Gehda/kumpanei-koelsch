@@ -7,12 +7,14 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>EventDetail</ion-title>
+    <ion-title>{{(event | async)?.name }}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <pre>
+  {{ event | async | json}}
+  </pre>
 </ion-content>
