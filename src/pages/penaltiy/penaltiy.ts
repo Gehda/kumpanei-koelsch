@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 /*
@@ -18,13 +18,41 @@ export class PenaltiyPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    angularFire: AngularFire
+    angularFire: AngularFire,
+    public alertCtrl: AlertController
     ) {
       this.events = angularFire.database.list('/events');
     }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PenaltiyPage');
+  }
+  addEvent(){
+    let prompt = this.alertCtrl.create({
+      title: 'Veranstaltung hinzufügen',
+      message: "Ein Veranstaltung für jetzt erstellen?",
+      buttons: [
+        {
+          text: 'Abbrechen',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Ja',
+          handler: data => {
+            let date = new Date().toLocaleString();
+            this.events.push({
+              name:date + "Stammtisch " 
+            });
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+  createEvent(){
+    console.log("Event created");
   }
 
 }

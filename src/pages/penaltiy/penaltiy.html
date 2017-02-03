@@ -8,14 +8,17 @@
 
   <ion-navbar>
     <ion-title>penaltiy</ion-title>
-    <button ion-button>+</button>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addEvent()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-  <button ion-fab><ion-icon name="add"></ion-icon></button>
   <ion-list>
     <ion-item *ngFor="let event of events | async">
       {{event.name}}
