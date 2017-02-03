@@ -16,21 +16,24 @@ export class PenaltiyPage {
   events: FirebaseListObservable<any>;
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     angularFire: AngularFire,
     public alertCtrl: AlertController
-    ) {
-      this.events = angularFire.database.list('/events');
-    }
+  ) {
+    this.events = angularFire.database.list('/events');
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PenaltiyPage');
   }
-  addEvent(){
+  addEvent() {
     let prompt = this.alertCtrl.create({
       title: 'Veranstaltung hinzufügen',
       message: "Ein Veranstaltung für jetzt erstellen?",
+      inputs:[
+        {name:'Name'},
+      ],
       buttons: [
         {
           text: 'Abbrechen',
@@ -41,9 +44,10 @@ export class PenaltiyPage {
         {
           text: 'Ja',
           handler: data => {
-            let date = new Date().toLocaleString();
+            console.log(data);
             this.events.push({
-              name:date + "Stammtisch " 
+              name: data.Name,
+              date: new Date().getTime()
             });
           }
         }
@@ -51,8 +55,30 @@ export class PenaltiyPage {
     });
     prompt.present();
   }
-  createEvent(){
-    console.log("Event created");
+  eventDetail(event) {
+    console.log(event);
+  }
+  deleteEvent(event) {
+    console.log("delete");
+    let prompt = this.alertCtrl.create({
+      title: 'Veranstaltung löschen',
+      message: 'Soll die Veranstaltung: "' + event.name + '" gelöscht werden?',
+      buttons: [
+        {
+          text: 'Abbrechen',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Ja',
+          handler: data => {
+            this.events.remove(event)
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
 }
