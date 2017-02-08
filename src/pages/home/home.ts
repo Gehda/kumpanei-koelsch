@@ -16,8 +16,5 @@ export class HomePage {
     
   }
 
-  goTo(page: Component){
-      this.navCtrl.push(page)
-  }
 
 }

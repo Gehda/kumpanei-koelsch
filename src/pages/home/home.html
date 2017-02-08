@@ -1,16 +1,7 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Menü
-    </ion-title>
-  </ion-navbar>
-</ion-header>
 
-<ion-content>
-  <button ion-button full (click)="goTo(ePage)">
-    Strafen
-  </button>
-  <button ion-button full (click)="goTo(sPage)">
-    Satzung
-  </button>
-</ion-content>
+<ion-tabs>
+      <ion-tab tabIcon="chatboxes" [root]="sPage">Chat</ion-tab>
+      <ion-tab tabIcon="people" [root]="ePage">Event</ion-tab>
+      <ion-tab tabIcon="logo-euro" [root]="sPage">Meine Strafen</ion-tab>
+      <ion-tab tabIcon="paper" [root]="sPage">Satzung</ion-tab>
+</ion-tabs>`
