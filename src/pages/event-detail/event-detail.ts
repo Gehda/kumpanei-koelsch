@@ -1,6 +1,7 @@
+import { EventEditPage } from './../event-edit/event-edit';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,ModalController } from 'ionic-angular';
 
 /*
   Generated class for the EventDetail page.
@@ -17,7 +18,8 @@ export class EventDetailPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public angularFire: AngularFire
+    public angularFire: AngularFire,
+    public modalCtrl: ModalController
     ) {
       console.log(this.navParams);
       console.log();
@@ -27,6 +29,10 @@ export class EventDetailPage {
   ionViewDidLoad() {
     
     
+  }
+  editEvent(){
+    console.log("object");
+    this.modalCtrl.create(EventEditPage, {event: this.event});
   }
 
 }
