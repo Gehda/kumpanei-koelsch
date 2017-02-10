@@ -1,6 +1,7 @@
+import { EventEditPage } from './../event-edit/event-edit';
 import { EventDetailPage } from './../event-detail/event-detail';
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 /*
@@ -18,6 +19,7 @@ export class EventsPage {
 
   constructor(
     public navCtrl: NavController,
+    public modalCtrl: ModalController,
     public navParams: NavParams,
     public angularFire: AngularFire,
     public alertCtrl: AlertController
@@ -29,32 +31,8 @@ export class EventsPage {
     console.log('ionViewDidLoad eventsPage');
   }
   addEvent() {
-    let prompt = this.alertCtrl.create({
-      title: 'Veranstaltung hinzufügen',
-      message: "Ein Veranstaltung für jetzt erstellen?",
-      inputs:[
-        {name:'Name'},
-      ],
-      buttons: [
-        {
-          text: 'Abbrechen',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Ja',
-          handler: data => {
-            console.log(data);
-            this.events.push({
-              name: data.Name,
-              date: new Date().getTime()
-            });
-          }
-        }
-      ]
-    });
-    prompt.present();
+    let createEvent = this.modalCtrl.create(EventEditPage, {create:true, events:this.events});
+    createEvent.present();
   }
   eventDetail(event) {
     this.navCtrl.push(EventDetailPage, {event: event});

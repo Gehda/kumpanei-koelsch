@@ -1,3 +1,4 @@
+import { EventEditPage } from './../pages/event-edit/event-edit';
 import { EventDetailPage } from './../pages/event-detail/event-detail';
 import { EventsPage } from './../pages/events/events';
 import { ScriptPage } from './../pages/script/script';
@@ -23,7 +24,8 @@ export const firebaseConfig = {
     HomePage,
     EventsPage,
     EventDetailPage,
-    ScriptPage
+    ScriptPage,
+    EventEditPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -35,7 +37,8 @@ export const firebaseConfig = {
     HomePage,
     ScriptPage,
     EventsPage,
-    EventDetailPage
+    EventDetailPage,
+    EventEditPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
