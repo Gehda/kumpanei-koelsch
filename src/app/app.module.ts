@@ -1,3 +1,4 @@
+import { LoginPage } from './../pages/login/login';
 import { EventEditPage } from './../pages/event-edit/event-edit';
 import { EventDetailPage } from './../pages/event-detail/event-detail';
 import { EventsPage } from './../pages/events/events';
@@ -8,7 +9,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
 //firebase
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 export const firebaseConfig = {
     apiKey: "AIzaSyBNGMkO2knzpcxf16b3DqWEch-rdfsqt5o",
     authDomain: "kumpaneikoelsch-4b1ed.firebaseapp.com",
@@ -16,7 +17,10 @@ export const firebaseConfig = {
     storageBucket: "kumpaneikoelsch-4b1ed.appspot.com",
     messagingSenderId: "795992524755"
 };
-
+const myAuthConfig = {
+  provider: AuthProviders.Password,
+  method: AuthMethods.Password
+}
 
 @NgModule({
   declarations: [
@@ -25,11 +29,12 @@ export const firebaseConfig = {
     EventsPage,
     EventDetailPage,
     ScriptPage,
-    EventEditPage
+    EventEditPage,
+    LoginPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig, myAuthConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -38,7 +43,8 @@ export const firebaseConfig = {
     ScriptPage,
     EventsPage,
     EventDetailPage,
-    EventEditPage
+    EventEditPage,
+    LoginPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
