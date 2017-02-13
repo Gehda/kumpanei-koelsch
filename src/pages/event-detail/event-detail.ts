@@ -21,8 +21,6 @@ export class EventDetailPage {
     public angularFire: AngularFire,
     public modalCtrl: ModalController
     ) {
-      console.log(this.navParams);
-      console.log();
       this.event = angularFire.database.object('/events/'+this.navParams.data.event.$key);
   }
 
@@ -31,8 +29,8 @@ export class EventDetailPage {
     
   }
   editEvent(){
-    console.log("object");
-    this.modalCtrl.create(EventEditPage, {event: this.event});
-  }
+    let modal = this.modalCtrl.create(EventEditPage, {event: this.event});
+    modal.present();
+}
 
 }

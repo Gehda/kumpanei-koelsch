@@ -27,11 +27,12 @@
     <ion-item>
       <ion-label>Anwesende</ion-label>
       <ion-select [(ngModel)]="editEvent.participants" multiple="true">
-        <ion-option *ngFor="let user of users">{{user.name}}</ion-option>
+        <ion-option *ngFor="let user of users" [value]="user">{{user.name}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <button ion-button full (click)="submitEvent()">OK</button>
     </ion-item>
   </ion-list>
+  {{editEvent | json}}
 </ion-content>

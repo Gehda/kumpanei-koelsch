@@ -1,4 +1,3 @@
-import { Event } from './../events/event-interface';
 import { FirebaseObjectObservable, FirebaseListObservable, AngularFire } from 'angularfire2';
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
@@ -14,7 +13,7 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
   templateUrl: 'event-edit.html'
 })
 export class EventEditPage {
-  users: any;
+  users = [];
   createFlag = false;
   event: FirebaseObjectObservable<any>;
   editEvent: any;
@@ -31,14 +30,18 @@ export class EventEditPage {
         participants:[],
         date: Date.now()
       }
-      this.initAllUsers();
+      this.getAllUsers();
+      
         if(this.navParams.data.create){
           this.createFlag = this.navParams.data.create;
           this.events = this.navParams.data.events;
           
         }else{
           this.event = this.navParams.data.event;
-          
+          this.event.$ref.once("value", 
+            res => this.editEvent = res.val(),
+            err => console.log(err)
+          )
         }
   }
 
@@ -56,9 +59,20 @@ export class EventEditPage {
   }
 
 
-  private initAllUsers(){
+  private getAllUsers(){
     this.angularFire.database.list('/users').subscribe(
-      (users) => this.users = users
+      (users) => {
+        users.forEach(
+          user => {
+            this.users.push(
+                {
+                  id: user.$key,
+                  name: user.name
+                }
+              )
+          }
+        )
+      }
     );
   }
 }
