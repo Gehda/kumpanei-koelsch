@@ -26,8 +26,8 @@
     </ion-item>
     <ion-item>
       <ion-label>Anwesende</ion-label>
-      <ion-select [(ngModel)]="editEvent.participants" multiple="true">
-        <ion-option *ngFor="let user of users" [value]="user">{{user.name}}</ion-option>
+      <ion-select (ionChange)="selectChange($event)" multiple="true">
+        <ion-option *ngFor="let user of users" [selected]="!(editEvent.participants[user.$key] == null)"  [value]="user.$key">{{user.name}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>

@@ -25,20 +25,21 @@ export class EventEditPage {
     public viewCtrl: ViewController,
     public angularFire: AngularFire
     ) {
-      this.editEvent = {
-        name:"",
-        participants:[],
-        date: Date.now()
-      }
+      
       this.getAllUsers();
       
         if(this.navParams.data.create){
+          this.editEvent = {
+            name:"",
+            participants:false,
+            date: Date.now()
+          }
           this.createFlag = this.navParams.data.create;
           this.events = this.navParams.data.events;
           
         }else{
           this.event = this.navParams.data.event;
-          this.event.$ref.once("value", 
+          this.event.$ref.on("value", 
             res => this.editEvent = res.val(),
             err => console.log(err)
           )
@@ -46,7 +47,7 @@ export class EventEditPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad EventEditPage');
+    console.log(this.editEvent);
   }
   submitEvent(){
     console.log(this.editEvent);
@@ -62,17 +63,19 @@ export class EventEditPage {
   private getAllUsers(){
     this.angularFire.database.list('/users').subscribe(
       (users) => {
-        users.forEach(
-          user => {
-            this.users.push(
-                {
-                  id: user.$key,
-                  name: user.name
-                }
-              )
-          }
-        )
+        this.users = users
       }
     );
+  }
+
+  selectChange(event){
+    this.editEvent.participants = false;
+    console.log(event);
+    if(event.length > 0){
+      this.editEvent.participants = {};
+      event.forEach((element, index, array) => {
+        this.editEvent.participants[element] = {penalties:false};
+      })
+    }
   }
 }

@@ -1,3 +1,6 @@
+import { EventPenaltiesDetailPage } from './../pages/event-penalties-detail/event-penalties-detail';
+import { EventReportPage } from './../pages/event-report/event-report';
+import { EventPenaltiesPage } from './../pages/event-penalties/event-penalties';
 import { LoginPage } from './../pages/login/login';
 import { EventEditPage } from './../pages/event-edit/event-edit';
 import { EventDetailPage } from './../pages/event-detail/event-detail';
@@ -30,7 +33,10 @@ const myAuthConfig = {
     EventDetailPage,
     ScriptPage,
     EventEditPage,
-    LoginPage
+    LoginPage,
+    EventPenaltiesPage,
+    EventPenaltiesDetailPage,
+    EventReportPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -44,7 +50,10 @@ const myAuthConfig = {
     EventsPage,
     EventDetailPage,
     EventEditPage,
-    LoginPage
+    LoginPage,
+    EventPenaltiesPage,
+    EventPenaltiesDetailPage,
+    EventReportPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

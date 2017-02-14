@@ -1,5 +1,7 @@
+import { EventPenaltiesPage } from './../event-penalties/event-penalties';
+import { EventReportPage } from './../event-report/event-report';
 import { EventEditPage } from './../event-edit/event-edit';
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { Component } from '@angular/core';
 import { NavController, NavParams,ModalController } from 'ionic-angular';
 
@@ -21,6 +23,7 @@ export class EventDetailPage {
     public angularFire: AngularFire,
     public modalCtrl: ModalController
     ) {
+
       this.event = angularFire.database.object('/events/'+this.navParams.data.event.$key);
   }
 
@@ -31,6 +34,11 @@ export class EventDetailPage {
   editEvent(){
     let modal = this.modalCtrl.create(EventEditPage, {event: this.event});
     modal.present();
-}
-
+  }
+  goPenalties(){
+    this.navCtrl.push(EventPenaltiesPage, {ref: this.event})
+  }
+  goReport(){
+    this.navCtrl.push(EventReportPage)
+  }
 }
