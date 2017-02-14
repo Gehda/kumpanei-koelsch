@@ -18,12 +18,7 @@ export class EventPenaltiesPage {
   eventRef: FirebaseObjectObservable<any>;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.eventRef = this.navParams.data.ref;
-    this.eventRef.$ref.on("value", 
-    event=>{
-        this.participantsList = event.val().participants
-        console.log(event.val())
-      }
-    )
+    this.participantsList = this.eventRef.$ref.child('participants');
 
   }
 
