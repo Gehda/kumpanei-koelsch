@@ -1,3 +1,4 @@
+import { ChatPage } from './../pages/chat/chat';
 import { EventPenaltiesDetailPage } from './../pages/event-penalties-detail/event-penalties-detail';
 import { EventReportPage } from './../pages/event-report/event-report';
 import { EventPenaltiesPage } from './../pages/event-penalties/event-penalties';
@@ -36,7 +37,8 @@ const myAuthConfig = {
     LoginPage,
     EventPenaltiesPage,
     EventPenaltiesDetailPage,
-    EventReportPage
+    EventReportPage,
+    ChatPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -53,7 +55,8 @@ const myAuthConfig = {
     LoginPage,
     EventPenaltiesPage,
     EventPenaltiesDetailPage,
-    EventReportPage
+    EventReportPage,
+    ChatPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
