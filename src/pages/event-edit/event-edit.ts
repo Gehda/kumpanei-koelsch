@@ -69,13 +69,15 @@ export class EventEditPage {
   }
 
   selectChange(event){
-    this.editEvent.participants = false;
-    console.log(event);
     if(event.length > 0){
+      let tmpPart = this.editEvent.participants;
       this.editEvent.participants = {};
       event.forEach((element, index, array) => {
-        this.editEvent.participants[element] = {penalties:false};
-      })
+        if(tmpPart[element] === undefined)this.editEvent.participants[element] = {penalties:false};
+        else this.editEvent.participants[element] = tmpPart[element];
+    })
+    }else{
+      this.editEvent.participants = false;
     }
   }
 }

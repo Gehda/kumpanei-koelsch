@@ -39,6 +39,6 @@ export class EventDetailPage {
     this.navCtrl.push(EventPenaltiesPage, {ref: this.event})
   }
   goReport(){
-    this.navCtrl.push(EventReportPage)
+    this.navCtrl.push(EventReportPage, {eventRef : this.event})
   }
 }

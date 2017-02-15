@@ -13,7 +13,10 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class EventReportPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+    console.log(this.navParams);
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventReportPage');
