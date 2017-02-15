@@ -14,5 +14,19 @@
 
 
 <ion-content padding>
+  <ion-item>
+    <ion-textarea [(ngModel)]="nextEntry"></ion-textarea>
+  </ion-item>
+    <button ion-button full (click)="submitEntry()">Nächster Protokolleintag</button>
 
+    <ion-list padding>
+      <ion-card *ngFor="let report of (reports | async)" (press)="deleteReport(report)">
+        <ion-card-header>
+          {{report.date | date:"EEE dd.MM.yyyy HH:mm" }}
+        </ion-card-header>
+        <ion-card-content>
+          {{report.text}}
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
 </ion-content>

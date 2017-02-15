@@ -38,7 +38,6 @@ export class EventsPage {
     this.navCtrl.push(EventDetailPage, {event: event});
   }
   deleteEvent(event) {
-    console.log("delete");
     let prompt = this.alertCtrl.create({
       title: 'Veranstaltung löschen',
       message: 'Soll die Veranstaltung: "' + event.name + '" gelöscht werden?',

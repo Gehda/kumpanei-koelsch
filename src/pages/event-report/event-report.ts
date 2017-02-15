@@ -1,5 +1,6 @@
+import { FirebaseObjectObservable, FirebaseListObservable, AngularFire } from 'angularfire2';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 
 /*
   Generated class for the EventReport page.
@@ -12,14 +13,44 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'event-report.html'
 })
 export class EventReportPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-
-    console.log(this.navParams);
+  nextEntry: String;
+  event: FirebaseObjectObservable<any>;
+  reports: FirebaseListObservable<any>;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire, public alertCtrl: AlertController) {
+    this.event = this.navParams.data.eventRef;
+    console.log(this.event.$ref.toString());
+    this.reports = this.af.database.list(this.event.$ref.toString()+'/reports')
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventReportPage');
   }
-
+  submitEntry(){
+    let tmpEntry = {
+      date: Date.now(),
+      text: this.nextEntry
+    };
+    this.reports.push(tmpEntry).then(()=> this.nextEntry = "");
+  }
+  deleteReport(report) {
+    let prompt = this.alertCtrl.create({
+      title: 'Eintrag löschen',
+      message: 'Soll der Eintrag  gelöscht werden?',
+      buttons: [
+        {
+          text: 'Abbrechen',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Ja',
+          handler: data => {
+            this.reports.remove(report)
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
 }
