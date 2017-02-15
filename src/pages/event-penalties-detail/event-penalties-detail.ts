@@ -15,13 +15,14 @@ import { NavController, NavParams } from 'ionic-angular';
 export class EventPenaltiesDetailPage {
 
 penalties: FirebaseListObservable<any>;
-event: FirebaseObjectObservable<any>;
+participantRef: firebase.database.Reference;
 participant: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
+    this.participantRef = this.navParams.data.participantRef;
     this.penalties = this.af.database.list('/penalties');
-    this.event = this.navParams.data.eventRef;
-    this.participant = this.navParams.data.participant;
-    if(!this.participant.penalties)this.participant.penalties = {};
+    this.participantRef.on('value', snap => {
+      this.participant = snap.val();
+    })
   }
 
   ionViewDidLoad() {
@@ -43,16 +44,15 @@ participant: any;
     if(this.participant.penalties[pen.$key]){
       //remove entry
       delete this.participant.penalties[pen.$key];
+      if(Object.keys(this.participant.penalties).length === 0) this.participant.penalties = false;
     }else{
+      if(!this.participant.penalties)this.participant.penalties = {};   
       //make entry
-      this.participant.penalties[pen.$key] = {};
+      this.participant.penalties[pen.$key] = true;
     }
   }
 
   updateRef(){
-    this.event.$ref.child('participants')
-    .once('value',snap => {
-      
-    })
+    this.participantRef.update(this.participant);
   }
 }

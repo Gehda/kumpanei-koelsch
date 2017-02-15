@@ -1,5 +1,5 @@
 import { EventPenaltiesDetailPage } from './../event-penalties-detail/event-penalties-detail';
-import { FirebaseObjectObservable } from 'angularfire2';
+import { FirebaseObjectObservable, AngularFire } from 'angularfire2';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
@@ -14,18 +14,34 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'event-penalties.html'
 })
 export class EventPenaltiesPage {
-  participantsList: any;
+  participantsKeys: any;
+  participantsList = [];
   eventRef: FirebaseObjectObservable<any>;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
     this.eventRef = this.navParams.data.ref;
-    this.participantsList = this.eventRef.$ref.child('participants');
+    this.eventRef.$ref.child('participants').once('value', snap => {
+      this.participantsKeys = Object.keys(snap.val());
+      this.participantsKeys.forEach(ele => {
+        this.getUsername(ele).subscribe( user => {
+          this.participantsList.push({
+            key: ele,
+            name: user.name
+          })
+        })
+      })
+    });
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventPenaltiesPage');
   }
-  setPenalty(participant){
-    this.navCtrl.push(EventPenaltiesDetailPage, {participant: participant, eventRef: this.eventRef})
+  getUsername(key) {
+   return this.af.database.object('/users/'+key);
+   }
+
+  setPenalty(key) {
+    let partRef = this.eventRef.$ref.child('participants').child(key);
+    this.navCtrl.push(EventPenaltiesDetailPage, { participantRef: partRef })
   }
 }
