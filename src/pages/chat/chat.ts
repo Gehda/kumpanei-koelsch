@@ -1,6 +1,7 @@
+import { User } from './../../providers/user';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component,ViewChild } from '@angular/core';
+import { NavController, NavParams, Content } from 'ionic-angular';
 
 /*
   Generated class for the Chat page.
@@ -13,22 +14,31 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'chat.html'
 })
 export class ChatPage {
+  @ViewChild('content') content: Content;
   chat: FirebaseListObservable<any>;
   nextMessage: String;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
+  user: firebase.User;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire, public UserService: User) {
     this.chat = this.af.database.list('/chat')
-    
   }
 
   ionViewDidLoad() {
+    this.chat.subscribe(msg => {
+      setTimeout(()=>{
+        this.content.scrollToBottom();
+      },200)
+    })
     console.log('ionViewDidLoad ChatPage');
   }
   sendMessage(){
     let tmpMsg = {
       date: Date.now(),
       msg: this.nextMessage,
-      author:this.af.auth.getAuth().uid
+      author:this.UserService.getMyUserProfile().uid
     };
     this.chat.push(tmpMsg).then(()=>this.nextMessage = "");
+  }
+  setUsername(uid :string){
+    return this.UserService.getUserName(uid);
   }
 }

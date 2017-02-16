@@ -13,11 +13,11 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content #content padding>
   <ion-list padding>
-    <ion-card  *ngFor="let msg of chat | async">
+    <ion-card class="message" *ngFor="let msg of chat | async">
       <ion-card-header>
-        <span item-left>{{msg.author | slice: 0 : 10}} </span><span item-right>{{msg.date | date:"dd.MM.yy HH:mm"}}</span>
+        <span class="name">{{ setUsername(msg.author) }} </span><span class="date">{{msg.date | date:"dd.MM.yy HH:mm"}}</span>
       </ion-card-header>
       <ion-card-content>
         {{msg.msg}}

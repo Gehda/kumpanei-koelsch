@@ -1,6 +1,7 @@
+import { CreateUserPage } from './../pages/create-user/create-user';
 import { LoginPage } from './../pages/login/login';
 import { Component } from '@angular/core';
-import { Platform, MenuController } from 'ionic-angular';
+import { Platform, MenuController, NavController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { AngularFireAuth } from 'angularfire2';
 
@@ -40,5 +41,13 @@ export class MyApp {
   }
   closeMenu(){
     this.menuCtrl.close();
+  }
+  goHome(){
+    this.rootPage = HomePage
+    this.closeMenu()
+  }
+  goUserSettings(){
+    this.rootPage = CreateUserPage
+    this.closeMenu()
   }
 }

@@ -6,8 +6,11 @@
   </ion-header>
   <ion-content>
     <ion-list>
-      <button ion-item >
-        Einstellungen
+      <button ion-item (click)="goHome()">
+        Home
+      </button>
+      <button ion-item (click)="goUserSettings()">
+        User erstellen
       </button>
       <button ion-item (click)="signOut()">
         Logout

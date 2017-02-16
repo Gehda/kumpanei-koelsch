@@ -1,0 +1,34 @@
+<!--
+  Generated template for the CreateUser page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>createUser</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+    <ion-item>
+      <ion-label floating color="primary">Email</ion-label>
+      <ion-input #email type="email" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating color="primary">Name</ion-label>
+      <ion-input #name type="name" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating color="primary">Passwort</ion-label>
+      <ion-input #password type="password" minlength="6"></ion-input>
+    </ion-item>
+    <ion-item>
+      <button ion-button full (click)="submitNewUser(email.value, name.value, password.value)">OK</button>
+    </ion-item>
+  </ion-list>
+</ion-content>

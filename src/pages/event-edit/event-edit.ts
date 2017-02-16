@@ -1,3 +1,4 @@
+import { User } from './../../providers/user';
 import { FirebaseObjectObservable, FirebaseListObservable, AngularFire } from 'angularfire2';
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
@@ -13,7 +14,7 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
   templateUrl: 'event-edit.html'
 })
 export class EventEditPage {
-  users = [];
+  users: any;
   createFlag = false;
   event: FirebaseObjectObservable<any>;
   editEvent: any;
@@ -23,7 +24,8 @@ export class EventEditPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public viewCtrl: ViewController,
-    public angularFire: AngularFire
+    public angularFire: AngularFire,
+    public UserService: User
     ) {
       
       this.getAllUsers();
@@ -61,11 +63,7 @@ export class EventEditPage {
 
 
   private getAllUsers(){
-    this.angularFire.database.list('/users').subscribe(
-      (users) => {
-        this.users = users
-      }
-    );
+    this.users = this.UserService.getAllUserProfiles();
   }
 
   selectChange(event){

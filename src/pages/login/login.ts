@@ -23,7 +23,6 @@ export class LoginPage {
   }
 
   signIn(){
-    console.log(this);
     this.afAuth.login(
       {
         email: this.email,

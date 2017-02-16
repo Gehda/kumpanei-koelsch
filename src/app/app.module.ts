@@ -1,3 +1,5 @@
+import { CreateUserPage } from './../pages/create-user/create-user';
+import { User } from './../providers/user';
 import { ChatPage } from './../pages/chat/chat';
 import { EventPenaltiesDetailPage } from './../pages/event-penalties-detail/event-penalties-detail';
 import { EventReportPage } from './../pages/event-report/event-report';
@@ -8,7 +10,7 @@ import { EventDetailPage } from './../pages/event-detail/event-detail';
 import { EventsPage } from './../pages/events/events';
 import { ScriptPage } from './../pages/script/script';
 import { NgModule, ErrorHandler } from '@angular/core';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler, NavController } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
@@ -38,7 +40,8 @@ const myAuthConfig = {
     EventPenaltiesPage,
     EventPenaltiesDetailPage,
     EventReportPage,
-    ChatPage
+    ChatPage,
+    CreateUserPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -56,8 +59,9 @@ const myAuthConfig = {
     EventPenaltiesPage,
     EventPenaltiesDetailPage,
     EventReportPage,
-    ChatPage
+    ChatPage,
+    CreateUserPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, User]
 })
 export class AppModule {}
