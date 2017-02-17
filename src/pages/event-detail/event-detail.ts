@@ -1,3 +1,4 @@
+import { User } from './../../providers/user';
 import { EventPenaltiesPage } from './../event-penalties/event-penalties';
 import { EventReportPage } from './../event-report/event-report';
 import { EventEditPage } from './../event-edit/event-edit';
@@ -21,7 +22,8 @@ export class EventDetailPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public angularFire: AngularFire,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    public UserService: User
     ) {
 
       this.event = angularFire.database.object('/events/'+this.navParams.data.event.$key);

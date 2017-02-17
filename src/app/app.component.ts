@@ -1,3 +1,4 @@
+import { User } from './../providers/user';
 import { CreateUserPage } from './../pages/create-user/create-user';
 import { LoginPage } from './../pages/login/login';
 import { Component } from '@angular/core';
@@ -13,8 +14,8 @@ import { HomePage } from '../pages/home/home';
 })
 export class MyApp {
   rootPage;
-
-  constructor(platform: Platform, public fireAuth: AngularFireAuth, public menuCtrl: MenuController) {
+  userProfile;
+  constructor(platform: Platform, public fireAuth: AngularFireAuth, public menuCtrl: MenuController, public UserService: User) {
     this.rootPage = HomePage;
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -29,8 +30,12 @@ export class MyApp {
   authProvider(){
     this.fireAuth.subscribe(
       res =>{
-        if(res == null)this.rootPage = LoginPage;
-        else this.rootPage = HomePage;
+        if(res == null){
+          this.rootPage = LoginPage;
+      }
+        else{
+           this.rootPage = HomePage;
+          }
     },
       err => console.log(err)
     )

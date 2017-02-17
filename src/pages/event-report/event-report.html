@@ -13,11 +13,13 @@
 </ion-header>
 
 
-<ion-content padding>
-  <ion-item>
-    <ion-textarea [(ngModel)]="nextEntry"></ion-textarea>
-  </ion-item>
-    <button ion-button full (click)="submitEntry()">Nächster Protokolleintag</button>
+<ion-content padding >
+  <div *ngIf="UserService.getMyUserProfile().admin">
+    <ion-item>
+      <ion-textarea [(ngModel)]="nextEntry"></ion-textarea>
+    </ion-item>
+      <button ion-button full (click)="submitEntry()">Nächster Protokolleintag</button>   
+  </div>
 
     <ion-list padding>
       <ion-card *ngFor="let report of (reports | async)" (press)="deleteReport(report)">

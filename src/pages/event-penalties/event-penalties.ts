@@ -15,19 +15,28 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class EventPenaltiesPage {
   participantsKeys: any;
-  participantsList = [];
+  participantsList: Array<any>;
   eventRef: FirebaseObjectObservable<any>;
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
     this.eventRef = this.navParams.data.ref;
     this.eventRef.$ref.child('participants').once('value', snap => {
+      console.log(snap.val());
       this.participantsKeys = Object.keys(snap.val());
+      console.log(this.participantsKeys);
+      this.participantsList = [];
       this.participantsKeys.forEach(ele => {
-        this.getUsername(ele).subscribe( user => {
-          this.participantsList.push({
-            key: ele,
-            name: user.name
-          })
+        this.af.database.list('/users', {query:{
+          orderByKey:true,
+          equalTo: ele
+        }}).subscribe(users => {
+          if(users[0]){
+            this.participantsList.push({
+              key:users[0].$key,
+              name:users[0].name
+            })
+          }
         })
+        
       })
     });
 

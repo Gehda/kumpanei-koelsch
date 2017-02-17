@@ -1,3 +1,4 @@
+import { User } from './../../providers/user';
 import { AngularFireAuth, AngularFire } from 'angularfire2';
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
@@ -12,9 +13,8 @@ import { NavController, NavParams, ToastController, AlertController } from 'ioni
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  email: any;
-  passwd: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public afAuth: AngularFireAuth, public toastCtrl: ToastController, public alertCtrl: AlertController) {
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams, public afAuth: AngularFireAuth, public toastCtrl: ToastController, public alertCtrl: AlertController, public UserService: User) {
 
   }
 
@@ -22,27 +22,8 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  signIn(){
-    this.afAuth.login(
-      {
-        email: this.email,
-        password: this.passwd
-      }
-    ).then(
-      res => {
-        console.log(res);
-      },
-      rej => {
-        let message: any = rej;
-        if(rej.message)message = rej.message;
-
-        let toast = this.toastCtrl.create({
-          message: message,
-          duration: 3000
-        })
-        toast.present();
-      }
-    )
+  signIn(email: string, password: string){
+    this.UserService.signIn(email, password);
   }
 
   rememberCredentials(){

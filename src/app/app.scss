@@ -14,3 +14,13 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+#logginText{
+    padding: 10px;
+    font-size: 30px;
+    text-align: center;
+    font-weight: bolder;
+    margin-top: 20px;
+}
+.scroll-content{
+        background: rgba(211, 211, 211, 0.4);
+    }

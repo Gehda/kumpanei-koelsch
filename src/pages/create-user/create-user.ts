@@ -1,3 +1,4 @@
+import { LoginPage } from './../login/login';
 import { User } from './../../providers/user';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
@@ -26,7 +27,7 @@ export class CreateUserPage {
   }
   submitNewUser(email: string, name: string, password: string){
     this.UserService.createUser(email,password,name).then(() => {
-      
+      this.navCtrl.setRoot(LoginPage);
     })
   }
 }

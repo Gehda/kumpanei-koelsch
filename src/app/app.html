@@ -1,21 +1,23 @@
 <ion-menu [content]="content">
   <ion-header>
     <ion-toolbar>
-      <ion-title>Pages</ion-title>
+      <ion-title>Menu</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <ion-list>
+    <div id="logginText" class="menu-content" *ngIf="!UserService.getMyUserProfile()"> Bitte logge dich zuerst ein! </div>
+    <ion-list *ngIf="UserService.getMyUserProfile()">
       <button ion-item (click)="goHome()">
         Home
       </button>
-      <button ion-item (click)="goUserSettings()">
-        User erstellen
+      <button ion-item *ngIf="UserService.getMyUserProfile().admin" (click)="goUserSettings()">
+        Benutzer erstellen
       </button>
       <button ion-item (click)="signOut()">
         Logout
       </button>
     </ion-list>
+    <img src="../assets/images/kumpanei.jpg" alt="">
   </ion-content>
 </ion-menu>
 

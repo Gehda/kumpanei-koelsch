@@ -9,7 +9,7 @@
   <ion-navbar>
     <ion-title>{{(event | async)?.name }}</ion-title>
      <ion-buttons end>
-      <button ion-button icon-only (click)="editEvent()">
+      <button ion-button icon-only *ngIf="UserService.getMyUserProfile().admin" (click)="editEvent()">
         <ion-icon name="create"></ion-icon>
       </button>
     </ion-buttons>
@@ -18,7 +18,7 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content padding>
     <ion-list>
         <ion-item (click)="goPenalties()">
           Strafen

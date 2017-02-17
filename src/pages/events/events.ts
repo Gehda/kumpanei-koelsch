@@ -1,3 +1,4 @@
+import { User } from './../../providers/user';
 import { EventEditPage } from './../event-edit/event-edit';
 import { EventDetailPage } from './../event-detail/event-detail';
 import { Component } from '@angular/core';
@@ -22,7 +23,8 @@ export class EventsPage {
     public modalCtrl: ModalController,
     public navParams: NavParams,
     public angularFire: AngularFire,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public UserService: User
   ) {
     this.events = angularFire.database.list('/events');
   }
@@ -38,6 +40,7 @@ export class EventsPage {
     this.navCtrl.push(EventDetailPage, {event: event});
   }
   deleteEvent(event) {
+    if(!this.UserService.getMyUserProfile().admin)return;
     let prompt = this.alertCtrl.create({
       title: 'Veranstaltung löschen',
       message: 'Soll die Veranstaltung: "' + event.name + '" gelöscht werden?',

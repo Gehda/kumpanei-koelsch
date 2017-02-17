@@ -1,4 +1,6 @@
-import { ToastController } from 'ionic-angular';
+import { LoginPage } from './../pages/login/login';
+import { HomePage } from './../pages/home/home';
+import { ToastController, NavController } from 'ionic-angular';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
@@ -13,27 +15,40 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class User {
     private fbUser: firebase.User
+    private fbProfile: FirebaseObjectObservable<any>;
     private userProfile: {
+      $key: string,
       name: string,
       uid: string,
       admin: boolean
   };
-    private users: Array<any>;
+    private users: Array<any>= [];
   constructor(public af: AngularFire, public toastCtrl: ToastController) {
-    //init all userProfiles
-    this.af.database.list('/users').subscribe(users => {
-      this.users = users;
-    }, err => this.showErrorMsg(err))
     //init user profile
     this.af.auth.subscribe(user => {
-      if(user != null){
-        this.fbUser = user.auth
-        this.af.database.object('/users/'+this.fbUser.uid).subscribe(userProfile => {
-          console.log('Logged in as '+userProfile.name);
-          this.userProfile = userProfile;
-        },err=>{
-          this.showErrorMsg(err)
-        })
+      //check auth
+      if(user){
+      //init fbUser
+      this.fbUser = user.auth
+      //init all userProfiles
+      this.af.database.list('/users').subscribe(users => {
+        this.users = users;
+      }, err => this.showErrorMsg(err))
+      //query profile
+      this.af.database.list('/users',{
+        query:{
+          orderByChild: 'uid',
+           equalTo: user.auth.uid,
+        }}).subscribe((user=>{
+          //asign profile
+          this.userProfile = user[0]
+          //get ref 
+          this.fbProfile = this.af.database.object('/users/'+user[0].$key)
+          console.log('logged in as '+this.userProfile.name);
+    }),err=>this.showErrorMsg(err))
+      }else{
+        this.fbUser =  undefined;
+        this.userProfile = undefined;
       }
     })
 
@@ -55,6 +70,24 @@ export class User {
     })
     return userName;
   }
+  isLoggedIn(){
+    if(this.fbUser)return true;
+    else return false;
+  }
+
+  signIn(email: string, password: string){
+    this.af.auth.login(
+      {
+        email: email,
+        password:password
+      }
+    ).then(res => {
+      console.log('Logged in');
+    },
+    err => this.showErrorMsg(err)
+    )
+  }
+  
 
   createUser(email: string, password: string, name: string){
     return this.af.auth.createUser({
@@ -69,8 +102,9 @@ export class User {
         name: name,
         admin: false
       }
+      
       //push profile
-      this.users.push(newUserProfile);
+      this.af.database.list('/users').push(newUserProfile)
       this.af.auth.logout();
 
     },
@@ -78,15 +112,17 @@ export class User {
       this.showErrorMsg(err)
     })
   }
-  showErrorMsg(err){
-    let message: any = err;
-        if(err.message)message = err.message;
 
-        let toast = this.toastCtrl.create({
-          message: message,
-          duration: 3000
-        })
-        toast.present();
+
+  showErrorMsg(err){
+        if(err.message){
+          let toast = this.toastCtrl.create({
+            message: err.message,
+            duration: 3000
+          })
+          toast.present();
+      }
+
   }
 
 }

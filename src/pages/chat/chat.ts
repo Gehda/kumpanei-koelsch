@@ -19,14 +19,18 @@ export class ChatPage {
   nextMessage: String;
   user: firebase.User;
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire, public UserService: User) {
-    this.chat = this.af.database.list('/chat')
+    this.chat = this.af.database.list('/chat', {query:{
+      limitToLast: 100
+    }})
   }
 
   ionViewDidLoad() {
     this.chat.subscribe(msg => {
       setTimeout(()=>{
-        this.content.scrollToBottom();
+        if(this.content)this.content.scrollToBottom();
       },200)
+    }, err=>{
+      
     })
     console.log('ionViewDidLoad ChatPage');
   }
@@ -40,5 +44,10 @@ export class ChatPage {
   }
   setUsername(uid :string){
     return this.UserService.getUserName(uid);
+  }
+  setMyMsg(uid){
+    if(!this.UserService.getMyUserProfile() || !uid)return false;
+    
+    return uid === this.UserService.getMyUserProfile().uid
   }
 }
