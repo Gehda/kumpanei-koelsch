@@ -16,12 +16,11 @@ export class MyApp {
   rootPage;
   userProfile;
   constructor(platform: Platform, public fireAuth: AngularFireAuth, public menuCtrl: MenuController, public UserService: User) {
-    this.rootPage = HomePage;
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
-      Splashscreen.hide();
+      
 
       this.authProvider();
     });
@@ -30,6 +29,7 @@ export class MyApp {
   authProvider(){
     this.fireAuth.subscribe(
       res =>{
+        Splashscreen.hide();
         if(res == null){
           this.rootPage = LoginPage;
       }

@@ -20,9 +20,7 @@ export class EventPenaltiesPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
     this.eventRef = this.navParams.data.ref;
     this.eventRef.$ref.child('participants').once('value', snap => {
-      console.log(snap.val());
       this.participantsKeys = Object.keys(snap.val());
-      console.log(this.participantsKeys);
       this.participantsList = [];
       this.participantsKeys.forEach(ele => {
         this.af.database.list('/users', {query:{

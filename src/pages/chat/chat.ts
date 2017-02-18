@@ -35,6 +35,7 @@ export class ChatPage {
     console.log('ionViewDidLoad ChatPage');
   }
   sendMessage(){
+    if(!this.nextMessage)return;
     let tmpMsg = {
       date: Date.now(),
       msg: this.nextMessage,
