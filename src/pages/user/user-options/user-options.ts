@@ -1,3 +1,5 @@
+import { ChangePasswordPage } from './../change-password/change-password';
+import { UserProfilePage } from './../user-profile/user-profile';
 import { CreateUserPage } from './../create-user/create-user';
 
 
@@ -24,10 +26,10 @@ export class UserOptionsPage {
     console.log('ionViewDidLoad UserOptionsPage');
   }
   goUserProfile(){
-
+    this.navCtrl.push(UserProfilePage)
   }
   goChangePassword(){
-
+    this.navCtrl.push(ChangePasswordPage)
   }
   goCreateUser(){
     this.navCtrl.push(CreateUserPage)

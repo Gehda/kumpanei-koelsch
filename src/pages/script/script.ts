@@ -1,3 +1,4 @@
+import { Script } from './../../providers/script';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
@@ -13,10 +14,11 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class ScriptPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public ScriptService: Script) {
+    
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ScriptPage');
   }
-
 }

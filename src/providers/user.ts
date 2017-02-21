@@ -1,3 +1,4 @@
+import { ChangePasswordPage } from './../pages/user/change-password/change-password';
 import { LoginPage } from './../pages/login/login';
 import { HomePage } from './../pages/home/home';
 import { ToastController, NavController } from 'ionic-angular';
@@ -26,20 +27,23 @@ export class User {
   constructor(public af: AngularFire, public toastCtrl: ToastController) {
     //init user profile
     this.af.auth.subscribe(user => {
+      let usersSub, profileSub;
+      console.log('Auth changed', user);
       //check auth
       if(user){
       //init fbUser
       this.fbUser = user.auth
       //init all userProfiles
-      this.af.database.list('/users').subscribe(users => {
+      usersSub = this.af.database.list('/users').subscribe(users => {
         this.users = users;
       }, err => this.showErrorMsg(err))
       //query profile
-      this.af.database.list('/users',{
+      profileSub = this.af.database.list('/users',{
         query:{
           orderByChild: 'uid',
            equalTo: user.auth.uid,
         }}).subscribe((user=>{
+          console.log('My new Profile', user[0]);
           //asign profile
           this.userProfile = user[0]
           //get ref 
@@ -47,6 +51,8 @@ export class User {
           console.log('logged in as '+this.userProfile.name);
     }),err=>this.showErrorMsg(err))
       }else{
+        if(profileSub)profileSub.unsubscribe();
+        if(usersSub)usersSub.unsubscribe();
         this.fbUser =  undefined;
         this.userProfile = undefined;
       }
@@ -97,7 +103,24 @@ export class User {
     err => this.showErrorMsg(err)
     )
   }
-  
+  changePassword(oldPwd: string, newPwd: string, newPwdSub:string, cb){
+    
+
+    const credentials = firebase.auth.EmailAuthProvider.credential(this.fbUser.email, oldPwd);
+    this.fbUser.reauthenticate(credentials).then((res)=>{
+      console.log(res);
+      if(newPwd === newPwdSub){
+            this.fbUser.updatePassword(newPwd).then(()=>{
+              cb();
+            })
+            .catch((err)=>{
+              this.showErrorMsg(err);
+            })
+      }else{
+        this.showErrorMsg('Die eingegeben Passwörter stimmen nicht überein!')
+      }
+    })
+  }
 
   createUser(email: string, password: string, name: string){
     return this.af.auth.createUser({

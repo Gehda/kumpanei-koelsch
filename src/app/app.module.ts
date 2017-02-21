@@ -1,3 +1,5 @@
+import { Script } from './../providers/script';
+import { ChangePasswordPage } from './../pages/user/change-password/change-password';
 import { ChatPage } from './../pages/chat/chat/chat';
 import { EventPenaltiesDetailPage } from './../pages/event/event-penalties-detail/event-penalties-detail';
 
@@ -46,7 +48,8 @@ const myAuthConfig = {
     CreateUserPage,
     UserOptionsPage,
     UserProfilePage,
-    EventPenaltiesDetailPage
+    EventPenaltiesDetailPage,
+    ChangePasswordPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -67,8 +70,9 @@ const myAuthConfig = {
     CreateUserPage,
     UserOptionsPage,
     UserProfilePage,
-    EventPenaltiesDetailPage
+    EventPenaltiesDetailPage,
+    ChangePasswordPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, User]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, User, Script]
 })
 export class AppModule {}
