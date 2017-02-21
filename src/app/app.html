@@ -10,8 +10,8 @@
       <button ion-item (click)="goHome()">
         Home
       </button>
-      <button ion-item *ngIf="UserService.getMyUserProfile().admin" (click)="goUserSettings()">
-        Benutzer erstellen
+      <button ion-item (click)="goUserSettings()">
+        Benutzereinstellungen
       </button>
       <button ion-item (click)="signOut()">
         Logout

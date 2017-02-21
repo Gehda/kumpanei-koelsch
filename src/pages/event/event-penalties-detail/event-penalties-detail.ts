@@ -1,4 +1,5 @@
-import { User } from './../../providers/user';
+import { User } from './../../../providers/user';
+
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
@@ -18,11 +19,13 @@ export class EventPenaltiesDetailPage {
 penalties: FirebaseListObservable<any>;
 participantRef: firebase.database.Reference;
 participant: any;
+partName: string;
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire, public UserService: User) {
     this.participantRef = this.navParams.data.participantRef;
     this.penalties = this.af.database.list('/penalties');
     this.participantRef.on('value', snap => {
       this.participant = snap.val();
+      this.partName = this.UserService.getUserNameByKey(snap.key);
     })
   }
 
@@ -50,7 +53,7 @@ participant: any;
     }else{
       if(!this.participant.penalties)this.participant.penalties = {};   
       //make entry
-      this.participant.penalties[pen.$key] = true;
+      this.participant.penalties[pen.$key] = {payed:false};
     }
   }
 

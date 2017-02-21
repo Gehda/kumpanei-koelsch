@@ -1,4 +1,4 @@
-import { User } from './../../providers/user';
+import { User } from './../../../providers/user';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Component,ViewChild } from '@angular/core';
 import { NavController, NavParams, Content } from 'ionic-angular';
@@ -44,7 +44,7 @@ export class ChatPage {
     this.chat.push(tmpMsg).then(()=>this.nextMessage = "");
   }
   setUsername(uid :string){
-    return this.UserService.getUserName(uid);
+    return this.UserService.getUserNameByUID(uid);
   }
   setMyMsg(uid){
     if(!this.UserService.getMyUserProfile() || !uid)return false;

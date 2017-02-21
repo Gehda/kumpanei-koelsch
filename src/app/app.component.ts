@@ -1,5 +1,6 @@
+import { UserOptionsPage } from './../pages/user/user-options/user-options';
+
 import { User } from './../providers/user';
-import { CreateUserPage } from './../pages/create-user/create-user';
 import { LoginPage } from './../pages/login/login';
 import { Component } from '@angular/core';
 import { Platform, MenuController, NavController } from 'ionic-angular';
@@ -52,7 +53,7 @@ export class MyApp {
     this.closeMenu()
   }
   goUserSettings(){
-    this.rootPage = CreateUserPage
+    this.rootPage = UserOptionsPage
     this.closeMenu()
   }
 }

@@ -1,4 +1,5 @@
-import { User } from './../../providers/user';
+import { User } from './../../../providers/user';
+
 import { FirebaseObjectObservable, FirebaseListObservable, AngularFire } from 'angularfire2';
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
@@ -19,7 +20,6 @@ export class EventReportPage {
   reports: FirebaseListObservable<any>;
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire, public alertCtrl: AlertController, public UserService: User) {
     this.event = this.navParams.data.eventRef;
-    console.log(this.event.$ref.toString());
     this.reports = this.af.database.list(this.event.$ref.toString()+'/reports')
   }
 

@@ -1,13 +1,16 @@
-import { CreateUserPage } from './../pages/create-user/create-user';
+import { ChatPage } from './../pages/chat/chat/chat';
+import { EventPenaltiesDetailPage } from './../pages/event/event-penalties-detail/event-penalties-detail';
+
+import { CreateUserPage } from './../pages/user/create-user/create-user';
 import { User } from './../providers/user';
-import { ChatPage } from './../pages/chat/chat';
-import { EventPenaltiesDetailPage } from './../pages/event-penalties-detail/event-penalties-detail';
-import { EventReportPage } from './../pages/event-report/event-report';
-import { EventPenaltiesPage } from './../pages/event-penalties/event-penalties';
+import { EventReportPage } from './../pages/event/event-report/event-report';
+import { EventPenaltiesPage } from './../pages/event/event-penalties/event-penalties';
+import { EventEditPage } from './../pages/event/event-edit/event-edit';
+import { EventDetailPage } from './../pages/event/event-detail/event-detail';
+import { EventsPage } from './../pages/event/events/events';
+import { UserOptionsPage } from './../pages/user/user-options/user-options';
 import { LoginPage } from './../pages/login/login';
-import { EventEditPage } from './../pages/event-edit/event-edit';
-import { EventDetailPage } from './../pages/event-detail/event-detail';
-import { EventsPage } from './../pages/events/events';
+import { UserProfilePage } from './../pages/user/user-profile/user-profile';
 import { ScriptPage } from './../pages/script/script';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler, NavController } from 'ionic-angular';
@@ -38,10 +41,12 @@ const myAuthConfig = {
     EventEditPage,
     LoginPage,
     EventPenaltiesPage,
-    EventPenaltiesDetailPage,
     EventReportPage,
     ChatPage,
-    CreateUserPage
+    CreateUserPage,
+    UserOptionsPage,
+    UserProfilePage,
+    EventPenaltiesDetailPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -57,10 +62,12 @@ const myAuthConfig = {
     EventEditPage,
     LoginPage,
     EventPenaltiesPage,
-    EventPenaltiesDetailPage,
     EventReportPage,
     ChatPage,
-    CreateUserPage
+    CreateUserPage,
+    UserOptionsPage,
+    UserProfilePage,
+    EventPenaltiesDetailPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, User]
 })

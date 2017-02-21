@@ -60,10 +60,20 @@ export class User {
   getMyUserProfile(){
     return this.userProfile;
   }
-  getUserName(uid: string){
+  getUserNameByUID(uid: string){
     let userName = '';
     this.users.forEach(user => {
       if(user.uid === uid){
+        userName = user.name;
+        return
+      }
+    })
+    return userName;
+  }
+  getUserNameByKey(key: string){
+    let userName = '';
+    this.users.forEach(user => {
+      if(user.$key === key){
         userName = user.name;
         return
       }

@@ -1,4 +1,5 @@
-import { User } from './../../providers/user';
+import { User } from './../../../providers/user';
+
 import { EventEditPage } from './../event-edit/event-edit';
 import { EventDetailPage } from './../event-detail/event-detail';
 import { Component } from '@angular/core';

@@ -1,5 +1,6 @@
-import { LoginPage } from './../login/login';
-import { User } from './../../providers/user';
+import { User } from './../../../providers/user';
+import { LoginPage } from './../../login/login';
+
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 

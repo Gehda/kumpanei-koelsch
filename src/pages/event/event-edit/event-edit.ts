@@ -1,4 +1,5 @@
-import { User } from './../../providers/user';
+import { User } from './../../../providers/user';
+
 import { FirebaseObjectObservable, FirebaseListObservable, AngularFire } from 'angularfire2';
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';

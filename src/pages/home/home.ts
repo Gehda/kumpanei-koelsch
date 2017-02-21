@@ -1,9 +1,10 @@
-import { ChatPage } from './../chat/chat';
+import { ChatPage } from './../chat/chat/chat';
+import { EventsPage } from './../event/events/events';
+
 import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
 
-import { EventsPage } from './../events/events';
 import { ScriptPage } from './../script/script';
 
 

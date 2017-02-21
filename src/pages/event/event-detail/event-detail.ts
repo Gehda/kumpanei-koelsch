@@ -1,7 +1,10 @@
-import { User } from './../../providers/user';
+import { User } from './../../../providers/user';
 import { EventPenaltiesPage } from './../event-penalties/event-penalties';
 import { EventReportPage } from './../event-report/event-report';
 import { EventEditPage } from './../event-edit/event-edit';
+
+
+
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { Component } from '@angular/core';
 import { NavController, NavParams,ModalController } from 'ionic-angular';

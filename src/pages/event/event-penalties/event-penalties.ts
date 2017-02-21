@@ -1,4 +1,5 @@
 import { EventPenaltiesDetailPage } from './../event-penalties-detail/event-penalties-detail';
+
 import { FirebaseObjectObservable, AngularFire } from 'angularfire2';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
@@ -43,7 +44,7 @@ export class EventPenaltiesPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventPenaltiesPage');
   }
-  getUsername(key) {
+  getUserNameByUID(key) {
    return this.af.database.object('/users/'+key);
    }
 
