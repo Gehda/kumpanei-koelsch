@@ -4,7 +4,7 @@
   "proxies":[
     {
       "path":"/storage",
-      "proxyUrl":"https://firebasestorage.googleapis.com/v0/b/kumpaneikoelsch-4b1ed.appspot.com/o/"
+      "proxyUrl":"gs://kumpaneikoelsch-4b1ed.appspot.com/"
     }
   ],
   "v2": true,

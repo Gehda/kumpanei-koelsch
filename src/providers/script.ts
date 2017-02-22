@@ -15,7 +15,7 @@ export class Script {
   constructor(public http: Http) {
     console.log('Hello Script Provider');
     firebase.storage().ref('Stammtisch Satzung.pdf').getDownloadURL().then(res => {
-      this.http.get('/storage/Stammtisch%20Satzung.pdf?alt=media&token=9f6c7745-4a83-44fc-ba00-5508c061ee1c').subscribe(pdf => {
+      this.http.get('/storage/Stammtisch Satzung.pdf').subscribe(pdf => {
         console.log(pdf);
       }, err => { console.log(err);})
     }, err => {
