@@ -1,8 +1,7 @@
-import { FirebaseApp, AngularFire } from 'angularfire2';
-import { firebaseConfig } from './../app/app.module';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import firebase from 'firebase';
 
 /*
   Generated class for the Script provider.
@@ -12,11 +11,18 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class Script {
-
+  script: firebase.storage.Reference;
   constructor(public http: Http) {
     console.log('Hello Script Provider');
-    this.init();
-  }
-  init(){
+    firebase.storage().ref('Stammtisch Satzung.pdf').getDownloadURL().then(res => {
+      this.http.get('/storage/Stammtisch%20Satzung.pdf?alt=media&token=9f6c7745-4a83-44fc-ba00-5508c061ee1c').subscribe(pdf => {
+        console.log(pdf);
+      }, err => { console.log(err);})
+    }, err => {
+
+    });
+    
+}
+  getScript(){
   }
 }

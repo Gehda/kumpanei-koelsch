@@ -1,6 +1,12 @@
 {
   "name": "kumpanei-kölsch",
   "app_id": "",
+  "proxies":[
+    {
+      "path":"/storage",
+      "proxyUrl":"https://firebasestorage.googleapis.com/v0/b/kumpaneikoelsch-4b1ed.appspot.com/o/"
+    }
+  ],
   "v2": true,
   "typescript": true
 }

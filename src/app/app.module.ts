@@ -18,6 +18,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler, NavController } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { PdfViewerComponent } from 'ng2-pdf-viewer';
 
 //firebase
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
@@ -49,7 +50,8 @@ const myAuthConfig = {
     UserOptionsPage,
     UserProfilePage,
     EventPenaltiesDetailPage,
-    ChangePasswordPage
+    ChangePasswordPage,
+    PdfViewerComponent
   ],
   imports: [
     IonicModule.forRoot(MyApp),

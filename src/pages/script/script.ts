@@ -13,12 +13,13 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'script.html'
 })
 export class ScriptPage {
-
+  scriptRef: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public ScriptService: Script) {
     
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ScriptPage');
-  }
+    this. scriptRef = this.ScriptService.getScript()
+}
 }
