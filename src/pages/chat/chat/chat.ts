@@ -25,12 +25,13 @@ export class ChatPage {
   }
 
   ionViewDidLoad() {
-    this.chat.subscribe(msg => {
+    this.chat
+    .subscribe(msg => {
       setTimeout(()=>{
         if(this.content)this.content.scrollToBottom();
       },200)
     }, err=>{
-      
+      console.log(err);
     })
     console.log('ionViewDidLoad ChatPage');
   }

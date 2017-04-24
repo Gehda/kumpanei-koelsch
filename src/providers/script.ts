@@ -13,15 +13,7 @@ import firebase from 'firebase';
 export class Script {
   script: firebase.storage.Reference;
   constructor(public http: Http) {
-    console.log('Hello Script Provider');
-    firebase.storage().ref('Stammtisch Satzung.pdf').getDownloadURL().then(res => {
-      this.http.get('/storage/Stammtisch Satzung.pdf').subscribe(pdf => {
-        console.log(pdf);
-      }, err => { console.log(err);})
-    }, err => {
-
-    });
-    
+    console.log('Hello Script Provider'); 
 }
   getScript(){
   }
