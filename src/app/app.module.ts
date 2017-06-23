@@ -1,3 +1,4 @@
+import { Penalty } from './../providers/penalty';
 import { Script } from './../providers/script';
 import { ChangePasswordPage } from './../pages/user/change-password/change-password';
 import { ChatPage } from './../pages/chat/chat/chat';
@@ -22,6 +23,7 @@ import { PdfViewerComponent } from 'ng2-pdf-viewer';
 
 //firebase
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
+import { PenaltiesOverviewPage } from "../pages/penalties/penalties-overview/penalties-overview";
 export const firebaseConfig = {
     apiKey: "AIzaSyBNGMkO2knzpcxf16b3DqWEch-rdfsqt5o",
     authDomain: "kumpaneikoelsch-4b1ed.firebaseapp.com",
@@ -51,7 +53,8 @@ const myAuthConfig = {
     UserProfilePage,
     EventPenaltiesDetailPage,
     ChangePasswordPage,
-    PdfViewerComponent
+    PdfViewerComponent,
+    PenaltiesOverviewPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -73,8 +76,14 @@ const myAuthConfig = {
     UserOptionsPage,
     UserProfilePage,
     EventPenaltiesDetailPage,
-    ChangePasswordPage
+    ChangePasswordPage,
+    PenaltiesOverviewPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, User, Script]
+  providers: [
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    User,
+    Script,
+    Penalty
+    ]
 })
 export class AppModule {}
