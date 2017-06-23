@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title *ngIf="auth.userInfo" >Hallo  {{auth.getUsernameById(auth.userInfo.uid) | async}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h2>Welcome to Ionic!</h2>
+  <ion-card *ngFor="let event of events | async">
+    <ion-card-header>
+      {{event.name}}
+    </ion-card-header>
+    <ion-card-content>
+      {{ event | json}}
+    </ion-card-content>
+  </ion-card>
+</ion-content>
