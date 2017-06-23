@@ -13,9 +13,9 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <ion-list>
-    <ion-item *ngIf="auth.isAdmin()" (click)="auth.createUser('emil@schlemil.com','emilschlemil')">
+    <ion-item *ngIf="auth.isAdmin()" (click)="auth.createUser('emil@schlemil.com','emilschlemil', 'Emil')">
       Create new User
     </ion-item>
     <ion-item (click)="auth.logout()">

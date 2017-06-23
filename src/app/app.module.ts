@@ -1,7 +1,7 @@
+import { EventDetailPageModule } from './../pages/event-detail/event-detail.module';
 import { SettingsPageModule } from './../pages/settings/settings.module';
-import { KumpaneiHeaderComponentModule } from './../components/kumpanei-header/kumpanei-header.module';
 import { LoginPageModule } from './../pages/login/login.module';
-import { Http, HttpModule } from '@angular/http';
+import {  HttpModule } from '@angular/http';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -19,7 +19,6 @@ import { AngularFireModule } from 'angularfire2';
 import { AuthProvider } from '../providers/auth/auth';
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { KumpaneiHeaderComponent } from "../components/kumpanei-header/kumpanei-header";
 import { EventsProvider } from '../providers/events/events';
 
 export const firebaseConfig = {
@@ -46,7 +45,8 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     LoginPageModule,
-    SettingsPageModule
+    SettingsPageModule,
+    EventDetailPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -39,14 +39,14 @@ export class AuthProvider {
   logout(){
     return this.authFire.auth.signOut();
   }
-  createUser(email, pwd){
+  createUser(email, pwd, name){
     if(!this.isAdmin) return;
     this.authFire.auth.createUserWithEmailAndPassword(email, pwd).then(res => {
         console.log(res);
         this.dbFire.object('users/' + res.uid).update(
           {
             admin: false,
-            name:'Emil',
+            name: name,
             uid: res.uid,
             createdBy:this.userInfo.uid,
             lastModify: Date.now()
